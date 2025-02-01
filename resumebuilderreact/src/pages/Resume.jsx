@@ -1,5 +1,7 @@
 
-export default function Resume() {
+export default function Resume({data}) {
+  console.log(data);
+  
   return (
     <div className="font-sans max-w-4xl mx-auto p-6 leading-relaxed">
       <header className="text-center mb-6">

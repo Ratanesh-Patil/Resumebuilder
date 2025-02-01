@@ -1,7 +1,7 @@
 import { Formik, Form, Field, FieldArray, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-const ResumeForm = () => {
+const ResumeForm = ({setdata}) => {
   const validationSchema = Yup.object({
     personalInfo: Yup.object({
       name: Yup.string().required("Name is required"),
@@ -64,6 +64,7 @@ const ResumeForm = () => {
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log(values);
+          setdata(values)
         }}
       >
         {({ values }) => (
@@ -126,7 +127,7 @@ const ResumeForm = () => {
                         <button
                           type="button"
                           onClick={() => remove(index)}
-                          className="text-red-500"
+                          className="text-red-500 p-1 border-2 bg-gray-300 rounded"
                         >
                           Remove Experience
                         </button>
@@ -177,7 +178,7 @@ const ResumeForm = () => {
                         <button
                           type="button"
                           onClick={() => remove(index)}
-                          className="text-red-500"
+                          className="text-red-500 p-1 border-2 bg-gray-300 rounded"
                         >
                           Remove Education
                         </button>
@@ -226,7 +227,7 @@ const ResumeForm = () => {
                         <button
                           type="button"
                           onClick={() => remove(index)}
-                          className="text-red-500"
+                         className="text-red-500 p-1 border-2 bg-gray-300 rounded"
                         >
                           Remove Project
                         </button>
@@ -261,7 +262,7 @@ const ResumeForm = () => {
                         <button
                           type="button"
                           onClick={() => remove(index)}
-                          className="text-red-500"
+                         className="text-red-500 p-1 border-2 bg-gray-300 rounded"
                         >
                           Remove
                         </button>
@@ -312,7 +313,7 @@ const ResumeForm = () => {
                         <button
                           type="button"
                           onClick={() => remove(index)}
-                          className="text-red-500"
+                        className="text-red-500 p-1 border-2 bg-gray-300 rounded"
                         >
                           Remove
                         </button>
@@ -333,7 +334,7 @@ const ResumeForm = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 focus:ring focus:ring-blue-300"
+              className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 focus:ring focus:ring-green-300"
             >
               Submit
             </button>
