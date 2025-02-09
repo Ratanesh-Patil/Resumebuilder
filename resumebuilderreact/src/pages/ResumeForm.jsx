@@ -28,7 +28,7 @@ const ResumeForm = ({ setdata }) => {
           .min(1, "At least one responsibility is required"),
       })
     ),
-    
+
     education: Yup.array().of(
       Yup.object({
         schoolName: Yup.string().required("School name is required"),
@@ -52,7 +52,7 @@ const ResumeForm = ({ setdata }) => {
           .min(1, "At least one skill is required in this category"),
       })
     ),
-    
+
     summary: Yup.string().required("Summary is required"),
     languages: Yup.array().of(Yup.string().required("Language is required")),
   });
@@ -63,22 +63,48 @@ const ResumeForm = ({ setdata }) => {
       <Formik
         initialValues={{
           personalInfo: {
-            name: "",
-            location: "",
-            email: "",
-            phone: "",
-            github: "",
-            linkedin: "",
+            name: "Ratnesh Patil",
+            location: "Pune",
+            email: "ratnesh.k.patil@gmail.com",
+            phone: "7350402226",
+            github: "http://github.com",
+            linkedin: "http://linkedin.com",
           },
           experiences: [
-            { companyName: "", designation: "", startDate: "", endDate: "" , responsibilities: [""]},
+            {
+              companyName: "PurpleGrad",
+              designation: "Full Stack Developer",
+              startDate: "",
+              endDate: "",
+              responsibilities: [
+                "Developed high-performance web applications using Java (backend) and React (frontend).",
+                "Designed and optimized PostgreSQL databases, ensuring data integrity and scalability.",
+                "Created RESTful APIs for efficient client-server communication and third-party integration.",
+                "Implemented Agile practices and version control (Git) for effective collaboration.",
+                "Conducted testing and debugging to ensure the stability and performance of the application.",
+              ],
+            },
           ],
-          education: [{ schoolName: "", passoutYear: "", degree: "" }],
-          projects: [{ projectName: "", description: "" }],
+          education: [
+            { schoolName: "IACSD", passoutYear: "2022", degree: "CDAC" },
+          ],
+          projects: [
+            {
+              projectName: "Bike Rental System",
+              description:
+                "Designed an online Bike Rental System for a company specializing in renting bikes.",
+            },
+          ],
           // skills: [""],
-          skills: [{ category: "", skills: [""] }], // Grouped skills
-          summary: "",
-          languages: [""],
+          skills: [
+            {
+              category: "Programming",
+              skills: ["java", "React", "SQL", "JavaScript"],
+            },
+          ], // Grouped skills
+          summary:
+            "Full-Stack Developer with experience in Java, React, and PostgreSQL. Proficient in building scalable web applications, RESTful APIs, and database management. Experienced in Agile development and delivery of secure, high-performance solutions to enhance business operations and efficiency.",
+          languages: ["Marathi", "Hindi", "English"],
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
@@ -125,42 +151,89 @@ const ResumeForm = ({ setdata }) => {
             </section>
 
             {/* Experience Section */}
-            {/* <section>
-              <h2 className="text-lg font-semibold mb-4">Experience</h2>
+
+            <section>
+              <h2 className="text-lg font-semibold mb-4">Experiences</h2>
               <FieldArray name="experiences">
                 {({ remove, push }) => (
                   <>
-                    {values.experiences.map((_, index) => (
-                      <div key={index} className="space-y-4 border-b pb-4 mb-4">
-                        {[
-                          "companyName",
-                          "designation",
-                          "startDate",
-                          "endDate",
-                        ].map((field) => (
-                          <div key={field}>
-                            <label
-                              htmlFor={`experiences.${index}.${field}`}
-                              className="block text-sm font-medium text-gray-600"
-                            >
-                              {field.replace(/([A-Z])/g, " $1")}
-                            </label>
-                            <Field
-                              name={`experiences.${index}.${field}`}
-                              type="text"
-                              className="mt-2 block w-full border rounded-md px-3 py-2 focus:ring-blue-500"
-                            />
-                            <ErrorMessage
-                              name={`experiences.${index}.${field}`}
-                              component="div"
-                              className="text-red-500 text-sm mt-1"
-                            />
-                          </div>
-                        ))}
+                    {values.experiences.map((experience, index) => (
+                      <div key={index} className="mb-6 p-4 border rounded-md">
+                        {/* Company Name */}
+                        <Field
+                          name={`experiences.${index}.companyName`}
+                          type="text"
+                          placeholder="Company Name"
+                          className="block w-full border rounded-md px-3 py-2 mb-2"
+                        />
+                        {/* Designation */}
+                        <Field
+                          name={`experiences.${index}.designation`}
+                          type="text"
+                          placeholder="Designation"
+                          className="block w-full border rounded-md px-3 py-2 mb-2"
+                        />
+                        {/* Start Date & End Date */}
+                        <div className="flex space-x-4 mb-2">
+                          <Field
+                            name={`experiences.${index}.startDate`}
+                            type="date"
+                            className="block w-full border rounded-md px-3 py-2"
+                          />
+                          <Field
+                            name={`experiences.${index}.endDate`}
+                            type="date"
+                            className="block w-full border rounded-md px-3 py-2"
+                          />
+                        </div>
+
+                        {/* Responsibilities (Bullet Points) */}
+                        <FieldArray
+                          name={`experiences.${index}.responsibilities`}
+                        >
+                          {({ remove, push }) => (
+                            <div className="mt-4">
+                              <h3 className="font-semibold mb-2">
+                                Responsibilities
+                              </h3>
+                              {experience.responsibilities.map(
+                                (_, bulletIndex) => (
+                                  <div
+                                    key={bulletIndex}
+                                    className="flex items-center space-x-4 mb-2"
+                                  >
+                                    <Field
+                                      name={`experiences.${index}.responsibilities.${bulletIndex}`}
+                                      type="text"
+                                      placeholder="Bullet point"
+                                      className="block w-full border rounded-md px-3 py-2"
+                                    />
+                                    <button
+                                      type="button"
+                                      onClick={() => remove(bulletIndex)}
+                                      className="text-red-500 p-1 border-2 bg-gray-300 rounded"
+                                    >
+                                      Remove
+                                    </button>
+                                  </div>
+                                )
+                              )}
+                              <button
+                                type="button"
+                                onClick={() => push("")}
+                                className="bg-green-500 text-white px-4 py-2 rounded"
+                              >
+                                Add Bullet Point
+                              </button>
+                            </div>
+                          )}
+                        </FieldArray>
+
+                        {/* Remove Experience Button */}
                         <button
                           type="button"
                           onClick={() => remove(index)}
-                          className="text-red-500 p-1 border-2 bg-gray-300 rounded"
+                          className="text-red-500 p-1 border-2 bg-gray-300 rounded mt-4"
                         >
                           Remove Experience
                         </button>
@@ -174,6 +247,7 @@ const ResumeForm = ({ setdata }) => {
                           designation: "",
                           startDate: "",
                           endDate: "",
+                          responsibilities: [""],
                         })
                       }
                       className="bg-blue-500 text-white px-4 py-2 rounded"
@@ -183,96 +257,7 @@ const ResumeForm = ({ setdata }) => {
                   </>
                 )}
               </FieldArray>
-            </section> */}
-            <section>
-  <h2 className="text-lg font-semibold mb-4">Experiences</h2>
-  <FieldArray name="experiences">
-    {({ remove, push }) => (
-      <>
-        {values.experiences.map((experience, index) => (
-          <div key={index} className="mb-6 p-4 border rounded-md">
-            {/* Company Name */}
-            <Field
-              name={`experiences.${index}.companyName`}
-              type="text"
-              placeholder="Company Name"
-              className="block w-full border rounded-md px-3 py-2 mb-2"
-            />
-            {/* Designation */}
-            <Field
-              name={`experiences.${index}.designation`}
-              type="text"
-              placeholder="Designation"
-              className="block w-full border rounded-md px-3 py-2 mb-2"
-            />
-            {/* Start Date & End Date */}
-            <div className="flex space-x-4 mb-2">
-              <Field
-                name={`experiences.${index}.startDate`}
-                type="date"
-                className="block w-full border rounded-md px-3 py-2"
-              />
-              <Field
-                name={`experiences.${index}.endDate`}
-                type="date"
-                className="block w-full border rounded-md px-3 py-2"
-              />
-            </div>
-
-            {/* Responsibilities (Bullet Points) */}
-            <FieldArray name={`experiences.${index}.responsibilities`}>
-              {({ remove, push }) => (
-                <div className="mt-4">
-                  <h3 className="font-semibold mb-2">Responsibilities</h3>
-                  {experience.responsibilities.map((_, bulletIndex) => (
-                    <div key={bulletIndex} className="flex items-center space-x-4 mb-2">
-                      <Field
-                        name={`experiences.${index}.responsibilities.${bulletIndex}`}
-                        type="text"
-                        placeholder="Bullet point"
-                        className="block w-full border rounded-md px-3 py-2"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => remove(bulletIndex)}
-                        className="text-red-500 p-1 border-2 bg-gray-300 rounded"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  ))}
-                  <button
-                    type="button"
-                    onClick={() => push("")}
-                    className="bg-green-500 text-white px-4 py-2 rounded"
-                  >
-                    Add Bullet Point
-                  </button>
-                </div>
-              )}
-            </FieldArray>
-
-            {/* Remove Experience Button */}
-            <button
-              type="button"
-              onClick={() => remove(index)}
-              className="text-red-500 p-1 border-2 bg-gray-300 rounded mt-4"
-            >
-              Remove Experience
-            </button>
-          </div>
-        ))}
-        <button
-          type="button"
-          onClick={() => push({ companyName: "", designation: "", startDate: "", endDate: "", responsibilities: [""] })}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Add Experience
-        </button>
-      </>
-    )}
-  </FieldArray>
-</section>
+            </section>
 
             {/* Education Section */}
             <section>
@@ -377,39 +362,6 @@ const ResumeForm = ({ setdata }) => {
             </section>
 
             {/* Skills Section */}
-            {/* <section>
-              <h2 className="text-lg font-semibold mb-4">Skills</h2>
-              <FieldArray name="skills">
-                {({ remove, push }) => (
-                  <>
-                    {values.skills.map((_, index) => (
-                      <div key={index} className="flex items-center space-x-4 mb-4">
-                        <Field
-                          name={`skills.${index}`}
-                          type="text"
-                          placeholder="Skill"
-                          className="block w-full border rounded-md px-3 py-2 focus:ring-blue-500"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => remove(index)}
-                         className="text-red-500 p-1 border-2 bg-gray-300 rounded"
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    ))}
-                    <button
-                      type="button"
-                      onClick={() => push("")}
-                      className="bg-blue-500 text-white px-4 py-2 rounded"
-                    >
-                      Add Skill
-                    </button>
-                  </>
-                )}
-              </FieldArray>
-            </section> */}
 
             <section>
               <h2 className="text-lg font-semibold mb-4">Skills</h2>
