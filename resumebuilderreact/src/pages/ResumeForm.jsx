@@ -1,6 +1,7 @@
 import { Formik, Form, Field, FieldArray, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
+import { CiCircleRemove } from "react-icons/ci";
+import { MdOutlineDelete } from "react-icons/md";
 const ResumeForm = ({ setdata }) => {
   const validationSchema = Yup.object({
     personalInfo: Yup.object({
@@ -211,9 +212,9 @@ const ResumeForm = ({ setdata }) => {
                                     <button
                                       type="button"
                                       onClick={() => remove(bulletIndex)}
-                                      className="text-red-500 p-1 border-2 bg-gray-300 rounded"
+                                      // className="text-red-500 p-1 border-2 bg-gray-300 rounded"
                                     >
-                                      Remove
+                                      <CiCircleRemove color="red" size={20} />
                                     </button>
                                   </div>
                                 )
@@ -233,9 +234,9 @@ const ResumeForm = ({ setdata }) => {
                         <button
                           type="button"
                           onClick={() => remove(index)}
-                          className="text-red-500 p-1 border-2 bg-gray-300 rounded mt-4"
+                          className=" mt-4 "
                         >
-                          Remove Experience
+                         <MdOutlineDelete color="red" size={20} />
                         </button>
                       </div>
                     ))}
@@ -292,9 +293,9 @@ const ResumeForm = ({ setdata }) => {
                         <button
                           type="button"
                           onClick={() => remove(index)}
-                          className="text-red-500 p-1 border-2 bg-gray-300 rounded"
+                          // className="text-red-500 p-1 border-2 bg-gray-300 rounded"
                         >
-                          Remove Education
+                         <MdOutlineDelete color="red" size={20} />
                         </button>
                       </div>
                     ))}
@@ -343,9 +344,9 @@ const ResumeForm = ({ setdata }) => {
                         <button
                           type="button"
                           onClick={() => remove(index)}
-                          className="text-red-500 p-1 border-2 bg-gray-300 rounded"
+                          // className="text-red-500 p-1 border-2 bg-gray-300 rounded"
                         >
-                          Remove Project
+                         <MdOutlineDelete color="red" size={20} />
                         </button>
                       </div>
                     ))}
@@ -384,9 +385,9 @@ const ResumeForm = ({ setdata }) => {
                           <button
                             type="button"
                             onClick={() => remove(categoryIndex)}
-                            className="text-red-500 p-1 border-2 bg-gray-300 rounded"
+                            // className="text-red-500 p-1 border-2 bg-gray-300 rounded"
                           >
-                            Remove Category
+                          <MdOutlineDelete color="red" size={20} />
                           </button>
                         </div>
 
@@ -397,7 +398,7 @@ const ResumeForm = ({ setdata }) => {
                               {category.skills.map((_, skillIndex) => (
                                 <div
                                   key={skillIndex}
-                                  className="flex items-center space-x-4 mb-2"
+                                  className="flex items-center space-x-4 mb-2 ml-4"
                                 >
                                   <Field
                                     name={`skills.${categoryIndex}.skills.${skillIndex}`}
@@ -410,7 +411,7 @@ const ResumeForm = ({ setdata }) => {
                                     onClick={() => remove(skillIndex)}
                                     className="text-red-500 p-1 border-2 bg-gray-300 rounded"
                                   >
-                                    Remove Skill
+                                    <CiCircleRemove color="red"  size={20}/>
                                   </button>
                                 </div>
                               ))}
@@ -474,9 +475,9 @@ const ResumeForm = ({ setdata }) => {
                         <button
                           type="button"
                           onClick={() => remove(index)}
-                          className="text-red-500 p-1 border-2 bg-gray-300 rounded"
+                          // className="text-red-500 p-1 border-2 bg-gray-300 rounded"
                         >
-                          Remove
+                           <CiCircleRemove color="red"  size={20}/>
                         </button>
                       </div>
                     ))}

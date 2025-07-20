@@ -8,18 +8,22 @@ function App() {
   const [data, setdata] = useState(null);
   return (
     <>
-      <div className="w-full  flex">
+      <div className="w-full h-screen flex">
         <PanelGroup direction="horizontal">
           {/* Left - Resume Form */}
           <Panel defaultSize={50} minSize={20} maxSize={80}>
-            <ResumeForm setdata={setdata} />
+            <div className="h-full overflow-auto">
+              <ResumeForm setdata={setdata} />
+            </div>
           </Panel>
           {/* Resizable Handle */}
           <PanelResizeHandle className="w-2 bg-gray-400 cursor-ew-resize" />
 
           {/* Right - Resume Preview */}
           <Panel defaultSize={50} minSize={20} maxSize={80}>
-            <Resume data={data} />
+            <div className="h-full overflow-auto">
+              <Resume data={data} />
+            </div>
           </Panel>
         </PanelGroup>
       </div>
